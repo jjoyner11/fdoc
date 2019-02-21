@@ -24,10 +24,10 @@ module Fdoc
 
     def parsed_request_params request_params
       if request_params.kind_of?(Hash)
-        request_params
+        request_params[:params] || request_params
       else
         begin
-          JSON.parse(request_params)
+          JSON.parse(request_params[:params] || request_params)
         rescue
           {}
         end
