@@ -185,22 +185,23 @@ describe Fdoc::Cli do
 
     context "by default" do
       it { should_not have_meta_service }
-      its(:service_presenters) { should have(1).service }
-      its(:output_path) { should =~ /html$/ }
+      
+      it { expect(subject.service_presenters.size).to eq(1) }
+      it { expect(subject.output_path).to match(/html$/) }
     end
 
     context "when an output path is specified" do
       let(:output_option) { "/a/path/for/html" }
       let(:options) { {:output => output_option} }
 
-      its(:output_path) { should == output_option }
+      it { expect(subject.output_path).to eq(output_option) }
     end
 
     context "when a meta service file exists" do
       before { with_fixture("sample_group.fdoc.meta") }
 
       it { should have_meta_service }
-      its(:service_presenters) { should have(1).service }
+      it { expect(subject.service_presenters.size).to eq(1) }
     end
 
     context "when the origin is a directory" do
@@ -248,23 +249,23 @@ describe Fdoc::Cli do
       subject.destination_root = html_path
     end
 
-    its(:html_options) { should include(:static_html => true) }
-    its(:html_options) { should include(:html_directory => html_path) }
+    it { expect(subject.html_options).to include(:static_html => true) }
+    it { expect(subject.html_options).to include(:html_directory => html_path) }
 
     context "when a template_directory is provided" do
       let(:options) { { :format => 'html', :templates => template_path } }
-      its(:html_options) { should include(:template_directory => template_path) }
+      it { expect(subject.html_options).to include(:template_directory => template_path) }
     end
 
     context "when url_base_path is not provided" do
-      its(:html_options) { should include(:url_base_path => nil) }
+      it { expect(subject.html_options).to include(:url_base_path => nil) }
     end
 
     context "when url_base_path is provided" do
       let(:url_base_path) { "totally/not/like/a/wsdl" }
       let(:options) { {:url_base_path => url_base_path} }
 
-      its(:html_options) { should include(:url_base_path => url_base_path) }
+      it { expect(subject.html_options).to include(:url_base_path => url_base_path) }
     end
   end
 

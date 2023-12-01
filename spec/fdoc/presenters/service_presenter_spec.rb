@@ -30,7 +30,7 @@ describe Fdoc::ServicePresenter do
       subject.service.meta_service = meta_service
     end
 
-    its(:relative_meta_service_path) { should == "../"}
+    it { expect(subject.relative_meta_service_path).to eq("../") }
 
     context "pass in filename" do
       it "should join with filename" do
