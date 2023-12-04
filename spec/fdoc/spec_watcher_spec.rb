@@ -24,16 +24,16 @@ describe Fdoc::SpecWatcher do
       @klass.extend(Fdoc::SpecWatcher)
     end
 
-    it 'should verify when params are a hash' do
+    it 'should verify when params are a hash', fdoc: 'index' do
       expect(Fdoc::Service).to receive(:verify!) do |*args|
         expect(args[2]).to eq({ :id => 1 })
       end
       @klass.get(:index, params: {:id => 1})
     end
 
-    it 'should verify when params are JSON' do
+    it 'should verify when params are JSON', fdoc: 'index' do
       expect(Fdoc::Service).to receive(:verify!) do |*args|
-        expect(args[2]).to eq({'id' => 1 })
+        expect(args[2]).to eq({'id' => 1 }.to_json)
       end
       @klass.get(:index, params: {:id => 1}.to_json)
     end
@@ -60,16 +60,16 @@ describe Fdoc::SpecWatcher do
       @klass.extend(Fdoc::SpecWatcher)
     end
 
-    it 'should verify when params are a hash' do
+    it 'should verify when params are a hash', fdoc: 'index' do
       expect(Fdoc::Service).to receive(:verify!)do |*args|
         expect(args[2]).to eq({ :id => 1 })
       end
       @klass.get("/", params: {:id => 1})
     end
 
-    it 'should verify when params are JSON' do
+    it 'should verify when params are JSON', fdoc: 'index' do
       expect(Fdoc::Service).to receive(:verify!) do |*args|
-        expect(args[2]).to eq({ 'id' => 1})
+        expect(args[2]).to eq({ 'id' => 1}.to_json)
       end
       @klass.get("/", params: {:id => 1}.to_json)
     end
