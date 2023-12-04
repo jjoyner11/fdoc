@@ -7,8 +7,8 @@ module Fdoc
     VERBS.each do |verb|
       define_method(verb) do |*params|
         action, request_params = params
-
-        request_params.nil? ? super(*params) : super(action, request_params)
+        
+        request_params.nil? ? super(*params) : super(action, **request_params)
 
         check_response(verb, request_params) if path
       end

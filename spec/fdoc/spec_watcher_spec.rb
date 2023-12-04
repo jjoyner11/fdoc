@@ -28,14 +28,14 @@ describe Fdoc::SpecWatcher do
       expect(Fdoc::Service).to receive(:verify!) do |*args|
         expect(args[2]).to eq({ :id => 1 })
       end
-      @klass.get(:index, {:id => 1})
+      @klass.get(:index, params: {:id => 1})
     end
 
     it 'should verify when params are JSON' do
       expect(Fdoc::Service).to receive(:verify!) do |*args|
         expect(args[2]).to eq({'id' => 1 })
       end
-      @klass.get(:index, {:id => 1}.to_json)
+      @klass.get(:index, params: {:id => 1}.to_json)
     end
   end
 
@@ -64,14 +64,14 @@ describe Fdoc::SpecWatcher do
       expect(Fdoc::Service).to receive(:verify!)do |*args|
         expect(args[2]).to eq({ :id => 1 })
       end
-      @klass.get("/", {:id => 1})
+      @klass.get("/", params: {:id => 1})
     end
 
     it 'should verify when params are JSON' do
       expect(Fdoc::Service).to receive(:verify!) do |*args|
         expect(args[2]).to eq({ 'id' => 1})
       end
-      @klass.get("/", {:id => 1}.to_json)
+      @klass.get("/", params: {:id => 1}.to_json)
     end
   end
 
